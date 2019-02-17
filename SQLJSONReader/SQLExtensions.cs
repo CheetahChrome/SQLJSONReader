@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Newtonsoft.Json;
 
-namespace Omega.SQLJSON.Extensions
+namespace SQLJSON.Extensions
 {
     public static class SQLExtensions
     {

@@ -1,16 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-    <AssemblyVersion>1.1.0.0</AssemblyVersion>
-    <FileVersion>1.1.0.0</FileVersion>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyVersion>1.4.0.0</AssemblyVersion>
+    <FileVersion>1.4.0.0</FileVersion>
     <Authors>William Wegerson</Authors>
     <Company>Omega Technical Solutions</Company>
-    <Description>Provides a way to read JSON data from SQL Server when calling a stored procedure.</Description>
-    <Copyright>2019</Copyright>
+    <Description>Provides a way to read JSON data from SQL Server when calling a stored procedure. Simply extends SQLJSON reader to process data from SQL Server which is returned as JSON on the table/rows/columns and returns it to the user as a string.</Description>
+    <Copyright>2020</Copyright>
     <PackageLicenseUrl>https://licenses.nuget.org/MIT</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/CheetahChrome/SQLJSONReader</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/CheetahChrome/SQLJSONReader/master/SQLJSONReader/images/Buddybleu.png</PackageIconUrl>
+    <Version>1.4.0</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

@@ -106,7 +106,7 @@ namespace SQLJSON.Extensions
                     return string.Empty;
 
                 // Clean up any JSON escapes before returning
-                return JsonConvert.DeserializeObject(sbResult.ToString()).ToString();
+                return string.IsNullOrWhiteSpace(sbResult.ToString()) ? string.Empty : JsonConvert.DeserializeObject(sbResult.ToString()).ToString();
             }
 
             public async Task<string> ReadAllAsync()
@@ -123,7 +123,7 @@ namespace SQLJSON.Extensions
                     return string.Empty;
 
                 // Clean up any JSON escapes before returning
-                return JsonConvert.DeserializeObject(sbResult.ToString()).ToString();
+                return string.IsNullOrWhiteSpace(sbResult.ToString()) ? string.Empty : JsonConvert.DeserializeObject(sbResult.ToString()).ToString();
             }
 
             public override void Close()

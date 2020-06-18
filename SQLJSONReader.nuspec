@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>SQLJSONReader</id>
+    <version>1.0.1</version>
+    <title>Reader of JSON from SQL Server</title>
+    <authors>William Wegerson</authors>
+    <owners></owners>
+	<iconUrl>https://github.com/CheetahChrome/SQLJSONReader/blob/master/SQLJSONReader/images/Buddy%20bleu.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <projectUrl>https://github.com/CheetahChrome/SQLJSONReader</projectUrl>
+    <description>SQL JSON Reader to handle multiple JSON lines from SQL Server database call. 
+
+An extension to the SQLCommand as `cmd.ExecuteJsonReaderAsync()` which reader returns a string of JSON data.</description>
+    <summary>Allows for reading of JSON which has been returned from a call to SQL Server. Avoids the 2033 character issue as found with `ExecuteXMLReader`.</summary>
+    <copyright>2019</copyright>
+    <language>en-US</language>
+    <tags>JSON "Sql Server" reader "Stored Proc" Procedure</tags>
+  </metadata>
+</package>

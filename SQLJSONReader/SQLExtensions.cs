@@ -100,13 +100,31 @@ namespace SQLJSON.Extensions
                 {
                     while (SqlReader.Read())
                         sbResult.Append(SqlReader.GetString(0));
-
                 }
                 else
                     return string.Empty;
 
-                // Clean up any JSON escapes before returning
-                return string.IsNullOrWhiteSpace(sbResult.ToString()) ? string.Empty : JsonConvert.DeserializeObject(sbResult.ToString()).ToString();
+                return ProcessResult(sbResult);
+            }
+            /// <summary>
+            /// Handle the result whether in JSON or not. If JSON the escapes will be removed.
+            /// </summary>
+            /// <param name="sbResult">The stringbuilder with the text.</param>
+            /// <returns>Final Output string</returns>
+            private static string ProcessResult(StringBuilder sbResult)
+            {
+                var finalResult = sbResult.ToString();
+
+                if (!string.IsNullOrWhiteSpace(finalResult))
+                {
+                    try // Clean up any JSON escapes before returning
+                    {
+                        finalResult = JsonConvert.DeserializeObject(finalResult).ToString();
+                    }
+                    catch (System.Exception) { } // Ignore standard text or invalid json returned.
+                }
+
+                return finalResult;
             }
 
             public async Task<string> ReadAllAsync()
@@ -122,8 +140,7 @@ namespace SQLJSON.Extensions
                 else
                     return string.Empty;
 
-                // Clean up any JSON escapes before returning
-                return string.IsNullOrWhiteSpace(sbResult.ToString()) ? string.Empty : JsonConvert.DeserializeObject(sbResult.ToString()).ToString();
+                return ProcessResult(sbResult);
             }
 
             public override void Close()

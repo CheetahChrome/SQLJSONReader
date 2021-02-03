@@ -2,6 +2,7 @@
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Text.Json;
 using Newtonsoft.Json;
 
 namespace SQLJSON.Extensions
@@ -13,16 +14,10 @@ namespace SQLJSON.Extensions
         /// the JSON. Sometimes the JSON has characters in it which 
         /// </summary>
         public static SqlJSONReader ExecuteJsonReader(this SqlCommand cmd)
-        {
-            var rdr = cmd.ExecuteReader();
-            return new SqlJSONReader(rdr);
-        }
+            => new SqlJSONReader(cmd.ExecuteReader());
 
         public static async Task<SqlJSONReader> ExecuteJsonReaderAsync(this SqlCommand cmd)
-        {
-            var rdr = await cmd.ExecuteReaderAsync();
-            return new SqlJSONReader(rdr);
-        }
+            => new SqlJSONReader( await cmd.ExecuteReaderAsync());
 
         public class SqlJSONReader : System.IO.TextReader
         {
@@ -36,25 +31,14 @@ namespace SQLJSON.Extensions
                 CurrentPostion = 0;
                 this.SqlReader = rdr;
             }
-            public override int Peek()
-            {
-                return GetChar(false);
-            }
+            
+            public override int Peek() => GetChar(false);
 
-            public async Task<int> PeekAsync()
-            {
-                return await GetCharAsync(false);
-            }
+            public async Task<int> PeekAsync() => await GetCharAsync(false);
+            
+            public override int Read() => GetChar(true);
 
-            public override int Read()
-            {
-                return GetChar(true);
-            }
-
-            public async Task<int> ReadAsync()
-            {
-                return await GetCharAsync(true);
-            }
+            public async Task<int> ReadAsync() => await GetCharAsync(true);
 
             public int GetChar(bool Advance)
             {
@@ -107,7 +91,7 @@ namespace SQLJSON.Extensions
                 return ProcessResult(sbResult);
             }
             /// <summary>
-            /// Handle the result whether in JSON or not. If JSON the escapes will be removed.
+            /// Handle the result whether in JSON or not. If JSON, the escapes will be removed.
             /// </summary>
             /// <param name="sbResult">The stringbuilder with the text.</param>
             /// <returns>Final Output string</returns>
@@ -143,10 +127,9 @@ namespace SQLJSON.Extensions
                 return ProcessResult(sbResult);
             }
 
-            public override void Close()
-            {
-                SqlReader.Close();
-            }
+            public override void Close() => SqlReader?.Close();
+            
+            
         }
 
     }

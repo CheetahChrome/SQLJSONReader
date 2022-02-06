@@ -11,7 +11,8 @@ using (SqlConnection conn = new SqlConnection(connection))
 {
     conn.Open();
 
-    using (var cmd = new SqlCommand(sproc, conn) { CommandType = CommandType.StoredProcedure, CommandTimeout = 600 })
+    using (var cmd = new SqlCommand(sproc, conn) { CommandType = CommandType.StoredProcedure, 
+                                                   CommandTimeout = 600 })
     {
         if (parameters != null)
             cmd.Parameters.AddRange(parameters);
@@ -22,3 +23,5 @@ using (SqlConnection conn = new SqlConnection(connection))
     }
 }
 ```
+
+See also [Json-Orm](https://www.nuget.org/packages/JSON-ORM/) Nuget Package which uses this package to process its SQL Server derived json into models.

@@ -27,3 +27,12 @@ using (SqlConnection conn = new SqlConnection(connection))
 
 See also [Json-Orm](https://www.nuget.org/packages/JSON-ORM/) Nuget Package which uses this package to process its SQL Server derived json into models.
 
+Note with Json-Orm, the above code can be distilled to
+
+```
+var connectionStr = @"Data Source=...";
+
+var jdb = new JsonOrmDatabase(connectionStr);
+
+string raw = jdb.GetRawSQL("[dbo].[GetMyDataInJson]");
+```

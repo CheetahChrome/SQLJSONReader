@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <AssemblyVersion>5.0.0.0</AssemblyVersion>
-    <FileVersion>5.0.0.0</FileVersion>
+    <AssemblyVersion>6.1.0.0</AssemblyVersion>
+    <FileVersion>6.1.0.0</FileVersion>
     <Authors>William Wegerson</Authors>
     <Company>Omega Technical Solutions</Company>
     <Description>Provides a way to read JSON data from SQL Server when calling a stored procedure. Simply extends SQLJSON reader to process data from SQL Server which is returned as JSON on the table/rows/columns and returns it to the user as a string.</Description>
@@ -11,14 +11,14 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/CheetahChrome/SQLJSONReader</PackageProjectUrl>
     <PackageIconUrl></PackageIconUrl>
-    <Version>6.0</Version>
+    <Version>6.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>Buddybleu.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>Removal of Newtonsoft.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>
 

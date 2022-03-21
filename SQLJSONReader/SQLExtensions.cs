@@ -3,7 +3,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Text.Json;
-using Newtonsoft.Json;
+using SQLJSONReader;
 
 namespace SQLJSON.Extensions
 {
@@ -89,6 +89,7 @@ namespace SQLJSON.Extensions
                     return string.Empty;
 
                 return ProcessResult(sbResult);
+                
             }
             /// <summary>
             /// Handle the result whether in JSON or not. If JSON, the escapes will be removed.
@@ -97,18 +98,26 @@ namespace SQLJSON.Extensions
             /// <returns>Final Output string</returns>
             private static string ProcessResult(StringBuilder sbResult)
             {
-                var finalResult = sbResult.ToString();
+             
+                sbResult.Replace("\\\t", "\t");
+                sbResult.Replace("\\\n", "\n");
+                sbResult.Replace("\\\r", "\r");
+             
+                //var finalResult = sbResult.ToString();
 
-                if (!string.IsNullOrWhiteSpace(finalResult))
-                {
-                    try // Clean up any JSON escapes before returning
-                    {
-                        finalResult = JsonConvert.DeserializeObject(finalResult).ToString();
-                    }
-                    catch (System.Exception) { } // Ignore standard text or invalid json returned.
-                }
+                //if (!string.IsNullOrWhiteSpace(finalResult))
+                //{
+                //    try // Clean up any JSON escapes before returning
+                //    {
 
-                return finalResult;
+
+                //        //finalResult = JsonConvert.DeserializeObject(finalResult).ToString();
+                //        finalResult = JsonDocument.Parse(finalResult).ToJsonString();
+                //    }
+                //    catch (System.Exception) { } // Ignore standard text or invalid json returned.
+                //}
+
+                return sbResult.ToString();
             }
 
             public async Task<string> ReadAllAsync()
@@ -119,12 +128,11 @@ namespace SQLJSON.Extensions
                 {
                     while (await SqlReader.ReadAsync())
                         sbResult.Append(SqlReader.GetString(0));
-
                 }
                 else
                     return string.Empty;
 
-                return ProcessResult(sbResult);
+               return ProcessResult(sbResult);
             }
 
             public override void Close() => SqlReader?.Close();
